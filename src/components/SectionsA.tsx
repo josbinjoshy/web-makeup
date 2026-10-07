@@ -189,7 +189,8 @@ export function Academics() {
           <AnimatePresence mode="wait">
             <motion.article key={open.id + filter} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
               className="bg-cream-50 text-navy-900 p-6 md:p-10 min-h-[420px]" aria-live="polite">
-              <p className="kicker text-brass-600">{open.code} — Department</p>
+              <img src={open.image} alt={`${open.name} at FISAT`} loading="lazy" className="h-44 md:h-56 w-full object-cover img-duo" />
+              <p className="kicker text-brass-600 mt-6">{open.code} — Department</p>
               <h3 className="font-display font-extrabold text-2xl md:text-4xl tracking-tight mt-2">{open.name}</h3>
               <div className="grid sm:grid-cols-2 gap-6 mt-6 text-sm">
                 <div>

@@ -45,6 +45,7 @@ export type Department = {
   id: string;
   code: string;
   name: string;
+  image: string;
   programmes: string[];
   intake: string;
   labs: string[];
@@ -55,7 +56,7 @@ export type Department = {
 
 export const departments: Department[] = [
   {
-    id: "cse", code: "01", name: "Computer Science & Engineering",
+    id: "cse", image: "/img-cse.jpg", code: "01", name: "Computer Science & Engineering",
     programmes: ["B.Tech CSE — 180 seats", "M.Tech Artificial Intelligence & Data Science — 12 seats", "M.Tech AI & DS (Working Professionals) — 15 seats", "Ph.D"],
     intake: "B.Tech 180 • M.Tech 12+15",
     labs: ["Central Computing Facility", "AI / Data Science Lab", "Robotics Lab", "Language Lab"],
@@ -64,7 +65,7 @@ export const departments: Department[] = [
     accredited: true,
   },
   {
-    id: "ece", code: "02", name: "Electronics & Communication Engineering",
+    id: "ece", image: "/img-ece.jpg", code: "02", name: "Electronics & Communication Engineering",
     programmes: ["B.Tech ECE — 120 seats", "M.Tech VLSI & Embedded Systems — 12 seats", "Ph.D"],
     intake: "B.Tech 120 • M.Tech 12",
     labs: ["VLSI & Embedded Lab", "Communication Lab", "Electronics Hackathon Lab (Burn-A-Board)"],
@@ -73,7 +74,7 @@ export const departments: Department[] = [
     accredited: true,
   },
   {
-    id: "eee", code: "03", name: "Electrical & Electronics Engineering",
+    id: "eee", image: "/img-eee.jpg", code: "03", name: "Electrical & Electronics Engineering",
     programmes: ["B.Tech EEE — 60 seats", "M.Tech Power Electronics & Power Systems — 12 seats"],
     intake: "B.Tech 60 • M.Tech 12",
     labs: ["Power Electronics Lab", "Power Systems Lab", "Electrical Machines Lab"],
@@ -82,7 +83,7 @@ export const departments: Department[] = [
     accredited: true,
   },
   {
-    id: "eie", code: "04", name: "Electronics & Instrumentation Engineering",
+    id: "eie", image: "/img-eie.png", code: "04", name: "Electronics & Instrumentation Engineering",
     programmes: ["B.Tech EIE — 60 seats"],
     intake: "B.Tech 60",
     labs: ["Instrumentation Lab", "Process Control Lab", "Sensors & Transducers Lab"],
@@ -91,7 +92,7 @@ export const departments: Department[] = [
     accredited: true,
   },
   {
-    id: "me", code: "05", name: "Mechanical Engineering",
+    id: "me", image: "/img-me.jpg", code: "05", name: "Mechanical Engineering",
     programmes: ["B.Tech ME — 120 seats", "M.Tech Renewable Energy — 12 seats", "M.Tech Renewable Energy (Working Professionals) — 15 seats"],
     intake: "B.Tech 120 • M.Tech 12+15",
     labs: ["ANSYS FEA / CAD-CAM Lab", "Thermal & Fluids Lab", "Manufacturing Lab", "IDEA Lab"],
@@ -100,7 +101,7 @@ export const departments: Department[] = [
     accredited: true,
   },
   {
-    id: "ce", code: "06", name: "Civil Engineering",
+    id: "ce", image: "/img-ce.jpg", code: "06", name: "Civil Engineering",
     programmes: ["B.Tech CE — 120 seats", "M.Tech Structural Engineering & Construction Management — 24 seats"],
     intake: "B.Tech 120 • M.Tech 24",
     labs: ["Structural Lab", "Surveying Lab", "Construction Materials Lab"],
@@ -109,7 +110,7 @@ export const departments: Department[] = [
     accredited: true,
   },
   {
-    id: "csd", code: "07", name: "Computer Science & Design",
+    id: "csd", image: "/img-idea.jpg", code: "07", name: "Computer Science & Design",
     programmes: ["B.Tech Computer Science & Design — 60 seats"],
     intake: "B.Tech 60",
     labs: ["Design Studio", "Computing Labs", "Media Lab"],
@@ -117,7 +118,7 @@ export const departments: Department[] = [
     opportunities: ["Highest placement % 91.6% (Class of 2025)", "Design + software roles"],
   },
   {
-    id: "mba", code: "08", name: "Business Administration (FISAT Business School)",
+    id: "mba", image: "/img-mba.jpg", code: "08", name: "Business Administration (FISAT Business School)",
     programmes: ["MBA — 120 seats (Finance, Marketing, HR, IS, Operations, International Business)"],
     intake: "MBA 120",
     labs: ["MBA Reference Library", "Seminar Halls", "ICT-enabled classrooms"],
@@ -125,7 +126,7 @@ export const departments: Department[] = [
     opportunities: ["Banking & consulting placements (Federal Bank, Deloitte, EY, KPMG)", "GD / PI + aptitude training"],
   },
   {
-    id: "mca", code: "09", name: "Computer Applications",
+    id: "mca", image: "/img-mca.jpg", code: "09", name: "Computer Applications",
     programmes: ["MCA (2-yr) — 60 seats", "Integrated MCA (5-yr) — 60 seats"],
     intake: "MCA 60 • IMCA 60",
     labs: ["MCA Labs", "Central Computing Facility", "Department reference library"],
@@ -193,15 +194,15 @@ export const founder = {
 };
 
 export const campusLife = [
-  { id: "hostel", title: "Hostel", text: "Boys' and girls' hostels on campus. Apply with admission; residential, warden-supported life minutes from class.", img: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=900&q=80&auto=format&fit=crop" },
-  { id: "library", title: "Library", text: "Three-storey LIC: 83,650+ volumes, OPAC, DSpace, Book Bank Scheme, reprographic centre.", img: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=900&q=80&auto=format&fit=crop" },
-  { id: "cafeteria", title: "Cafeteria", text: "The social condenser — central cafeteria plus bank & ATM on campus.", img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80&auto=format&fit=crop" },
-  { id: "sports", title: "Sports", text: "Sports & Games: outdoor grounds, indoor games, annual arts & sports calendar.", img: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=900&q=80&auto=format&fit=crop" },
-  { id: "fitness", title: "Fitness", text: "Fitness Centre for strength, conditioning and wellness.", img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&q=80&auto=format&fit=crop" },
-  { id: "activities", title: "Student Activities", text: "Curricular & co-curricular: workshops (ANSYS FEA, STM32, SolidWorks), LinkedIn & France-Connect sessions, NEXUS, Resonance alumni meets.", img: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=900&q=80&auto=format&fit=crop" },
-  { id: "clubs", title: "Clubs", text: "ISTE, NDLI Club, department associations, NSS-style social commitments.", img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&q=80&auto=format&fit=crop" },
-  { id: "tech", title: "Technical Fests", text: "Burn-A-Board 24-hr electronics hackathon, i-SMaRT conference, IDEA Lab builds like Agrobot DAWN.", img: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&q=80&auto=format&fit=crop" },
-  { id: "cultural", title: "Cultural Fests", text: "Arts, Hall of Fame victories, Vidyarambham and campus celebrations.", img: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=900&q=80&auto=format&fit=crop" },
+  { id: "hostel", title: "Hostel", text: "Four hostel blocks for 1300+ students — men's UG & PG blocks and ladies' UG & PG blocks, with mess halls, reading rooms and wardens.", img: "/hero-fisat.png" },
+  { id: "library", title: "Library", text: "Three-storey LIC: 83,650+ volumes, OPAC, DSpace, Book Bank Scheme, reprographic centre.", img: "/img-library.jpg" },
+  { id: "cafeteria", title: "Cafeteria", text: "The college canteen near all departments — fresh meals from trained chefs, seating even at peak hours, plus bank & ATM on campus.", img: "/img-cafeteria.jpg" },
+  { id: "sports", title: "Sports", text: "Green turf football ground, cricket ground with net practice, basketball, volleyball, badminton courts and athletics.", img: "/img-sports.jpg" },
+  { id: "fitness", title: "Fitness", text: "Separate modern fitness centres for boys and girls, plus a clinical psychologist and 24x7 ambulance on campus.", img: "/img-fitness.jpg" },
+  { id: "activities", title: "Student Activities", text: "Curricular & co-curricular: ANSYS FEA, STM32 and SolidWorks workshops, LinkedIn & France-Connect sessions, NEXUS, Resonance alumni meets.", img: "/img-ansys.jpg" },
+  { id: "clubs", title: "Clubs", text: "ISTE, NDLI Club, department associations and social-commitment outreach.", img: "/img-social.jpg" },
+  { id: "tech", title: "Technical Fests", text: "IDEA Lab builds like Agrobot DAWN, Burn-A-Board 24-hr electronics hackathon and the i-SMaRT international conference.", img: "/img-idea.jpg" },
+  { id: "cultural", title: "Cultural Fests", text: "Arts & sports calendar, Hall of Fame victories, Vidyarambham and campus celebrations.", img: "/img-arts.jpg" },
 ];
 
 export type BusStopTime = { stop: string; time: string };

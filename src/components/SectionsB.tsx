@@ -43,9 +43,9 @@ export function Founder() {
           </ol>
           <div className="mt-8 grid grid-cols-3 gap-3">
             {[
-              ["https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=600&q=80&auto=format&fit=crop", "Campus blocks"],
-              ["https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80&auto=format&fit=crop", "Graduation day"],
-              ["https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80&auto=format&fit=crop", "Lecture hall"],
+              ["/img-france.jpg", "France Connect guidance session at FISAT"],
+              ["/img-ansys.jpg", "ANSYS FEA skill workshop at FISAT"],
+              ["/img-idea.jpg", "IDEA Lab at FISAT"],
             ].map(([src, alt]) => (
               <img key={src} src={src} alt={alt} loading="lazy" className="h-28 md:h-36 w-full object-cover img-duo opacity-90 border hairline-light" />
             ))}
@@ -184,19 +184,17 @@ export function Library() {
           <p className="mt-6 text-xs text-cream-50/55">Help desk: {libraryData.contact}</p>
         </div>
         <div className="grid grid-cols-2 gap-2 content-start">
-          {[
-            ["https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&q=80&auto=format&fit=crop", "Library stacks"],
-            ["https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80&auto=format&fit=crop", "Reading room"],
-            ["https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&q=80&auto=format&fit=crop", "Grand library hall"],
-            ["https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&q=80&auto=format&fit=crop", "Study desks"],
-          ].map(([src, alt], i) => (
-            <Reveal key={src} delay={i * 0.06}>
-              <img src={src} alt={alt} loading="lazy" className={`w-full object-cover img-duo border hairline-light ${i % 3 === 0 ? "h-64" : "h-44"} ${i === 2 ? "h-56" : ""}`} />
-            </Reveal>
-          ))}
+          <Reveal className="col-span-2">
+            <img src="/img-library.jpg" alt="Central Library — FISAT" loading="lazy" className="w-full h-64 md:h-80 object-cover img-duo border hairline-light" />
+          </Reveal>
           <div className="col-span-2 border hairline-light p-5 flex justify-between items-center">
             <span className="font-display font-extrabold text-2xl">83,650<span className="text-brass-400">+</span> <span className="text-sm font-medium text-cream-50/60">volumes</span></span>
             <span className="font-display font-extrabold text-2xl">5,000<span className="text-brass-400">+</span> <span className="text-sm font-medium text-cream-50/60">e-journals</span></span>
+          </div>
+          <div className="col-span-2 border hairline-light p-5">
+            <p className="kicker text-brass-400">Visit the library</p>
+            <p className="mt-2 text-sm text-cream-50/75 leading-relaxed">{libraryData.hours}.</p>
+            <p className="mt-1 text-sm text-cream-50/60">{libraryData.location}.</p>
           </div>
         </div>
       </div>
