@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Building2, MapPin, X } from "lucide-react";
+import { ArrowUpRight, Building2, MapPin } from "lucide-react";
 import { useState } from "react";
-import { campusNodes, departments, projects } from "../data/institution";
+import { campusNodes, departments } from "../data/institution";
 import { Reveal, SectionHead } from "./ui";
 
 export function CampusMap() {
@@ -196,8 +196,8 @@ export function Academics() {
                 <a href="#admissions" className="inline-flex items-center gap-2 bg-navy-900 text-cream-50 font-display font-bold text-sm px-6 py-3 hover:bg-navy-800 min-h-[48px]">
                   ADMISSION LINK <ArrowUpRight size={15} aria-hidden="true" />
                 </a>
-                <a href="https://fisat.ac.in" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border hairline font-display font-bold text-sm px-6 py-3 hover:border-navy-900 min-h-[48px]">
-                  OFFICIAL DEPT. PAGE
+                <a href="#vision" className="inline-flex items-center gap-2 border hairline font-display font-bold text-sm px-6 py-3 hover:border-navy-900 min-h-[48px]">
+                  VISION & MISSION
                 </a>
               </div>
             </motion.article>
@@ -212,51 +212,6 @@ export function Academics() {
               <span className="text-xs opacity-70">{d.intake}</span>
             </button>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function BuiltAtFisat() {
-  return (
-    <section id="built" aria-label="Student project showcase" className="bg-cream-50 scroll-mt-20 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 md:py-28">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <SectionHead no="03" kicker="Technology exhibition"
-            title={<>BUILT AT<br />FISAT<span className="text-brass-600">.</span></>}
-            lede="A horizontal exhibition hall. Drag / scroll sideways — each piece is a real student-design direction named in the brief."
-          />
-          <Reveal className="hidden md:block pb-2">
-            <p className="font-display text-xs tracking-[0.25em] text-navy-900/50">SCROLL → TO WALK THE HALL</p>
-          </Reveal>
-        </div>
-      </div>
-      <div className="pb-16 md:pb-24">
-        <div className="flex gap-5 overflow-x-auto no-scrollbar snap-x px-5 md:px-10 pb-4" role="list" aria-label="Projects">
-          {projects.map((p, i) => (
-            <Reveal key={p.title} delay={Math.min(i * 0.05, 0.3)} className="snap-start shrink-0 w-[82vw] sm:w-[420px]">
-              <article role="listitem" className="group border hairline bg-white/70 h-full flex flex-col hover:border-navy-900 transition-colors">
-                <div className="relative h-52 overflow-hidden bg-navy-900">
-                  <img src={`https://images.unsplash.com/${["photo-1581091226825-a6a2a5aee158", "photo-1518770660439-4636190af475", "photo-1449824913935-59a10b8d2000", "photo-1532996122724-e3c354a0b15b", "photo-1503676260728-1c00da094a0b", "photo-1558089687-f282ffcbc126", "photo-1449965408869-eaa3f722e40d", "photo-1581092160562-40aa08e78837"][i % 8]}?w=900&q=80&auto=format&fit=crop`}
-                    alt="" loading="lazy" className="w-full h-full object-cover opacity-80 img-duo group-hover:scale-105 transition-transform duration-700" />
-                  <span className="absolute top-3 left-3 bg-navy-950/85 text-cream-50 font-display text-[11px] tracking-[0.2em] px-3 py-1.5">{p.exhibit.toUpperCase()}</span>
-                  <span className="absolute bottom-3 right-3 bg-brass-500 text-navy-950 font-display text-[11px] font-bold px-3 py-1.5">0{i + 1}</span>
-                </div>
-                <div className="p-5 md:p-6 flex-1 flex flex-col">
-                  <p className="kicker text-brass-600">{p.tag} • {p.dept}</p>
-                  <h3 className="font-display font-extrabold text-xl md:text-2xl tracking-tight text-navy-900 mt-2 leading-tight">{p.title}</h3>
-                  <p className="text-sm text-navy-900/70 mt-2 leading-relaxed flex-1">{p.description}</p>
-                  <span className="mt-4 pt-4 border-t hairline text-xs font-display tracking-[0.2em] text-navy-900/60 group-hover:text-navy-900">VIEW EXHIBIT →</span>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-          <div className="snap-start shrink-0 w-[82vw] sm:w-[320px] border border-dashed hairline flex flex-col items-center justify-center text-center p-8 min-h-[380px]">
-            <X size={0} aria-hidden="true" className="hidden" />
-            <p className="font-serif-i italic text-2xl text-navy-900/80">Your project<br />here next year.</p>
-            <a href="#admissions" className="mt-5 inline-flex items-center gap-2 bg-navy-900 text-cream-50 text-sm font-display font-bold px-6 py-3 min-h-[48px]">START BUILDING <ArrowUpRight size={15} aria-hidden="true" /></a>
-          </div>
         </div>
       </div>
     </section>

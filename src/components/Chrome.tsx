@@ -7,7 +7,6 @@ import { Magnetic } from "./ui";
 const links = [
   { href: "#campus", label: "Campus" },
   { href: "#academics", label: "Academics" },
-  { href: "#built", label: "Built at FISAT" },
   { href: "#founder", label: "Founder" },
   { href: "#life", label: "Life" },
   { href: "#placements", label: "Careers" },
@@ -29,13 +28,13 @@ export function Nav() {
       </a>
       <header className={`fixed inset-x-0 top-0 z-50 transition-all ${scrolled ? "bg-cream-50/92 backdrop-blur border-b hairline" : "bg-transparent"}`} style={{ background: scrolled ? "rgba(250,247,240,.93)" : "transparent" }}>
         <nav aria-label="Primary" className="mx-auto max-w-[1400px] px-5 md:px-10 h-16 md:h-20 flex items-center justify-between">
-          <a href="#top" className="flex items-center gap-3 min-h-[44px]" aria-label="FISAT home">
-            <span className={`font-display font-extrabold tracking-tight text-xl md:text-2xl ${scrolled ? "text-navy-900" : "text-cream-50"}`}>
-              FISAT<span className="text-brass-500">.</span>
-            </span>
-            <span className={`hidden lg:block text-[11px] leading-tight max-w-[220px] ${scrolled ? "text-navy-900/60" : "text-cream-50/70"}`}>
-              Federal Institute of Science and Technology
-            </span>
+          <a href="#top" className="flex items-center gap-3 min-h-[44px]" aria-label="FISAT — Federal Institute of Science and Technology, home">
+            <img
+              src="/fisat-logo.png"
+              alt="FISAT — Federal Institute of Science and Technology, Focus on Excellence, Autonomous"
+              className="h-11 md:h-14 w-auto max-w-[280px] md:max-w-[360px] object-contain bg-white px-2 py-1 rounded-sm shadow-sm"
+              fetchPriority="high"
+            />
           </a>
           <ul className="hidden md:flex items-center gap-7">
             {links.map((l) => (
@@ -93,8 +92,8 @@ export function Hero() {
     <section ref={ref} id="top" aria-label="FISAT hero" className="relative min-h-[100svh] bg-navy-900 text-cream-50 overflow-hidden flex flex-col">
       <motion.div style={{ y: bgY }} className="absolute inset-0" aria-hidden="true">
         <img
-          src="https://images.unsplash.com/photo-1562774053-701939374585?w=2000&q=80&auto=format&fit=crop"
-          alt="" className="w-full h-full object-cover img-duo opacity-60" fetchPriority="high" />
+          src="/hero-fisat.png"
+          alt="Aerial view of FISAT campus buildings at Hormis Nagar, Mookkannoor, Angamaly" className="w-full h-full object-cover img-duo opacity-70" fetchPriority="high" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(6,15,36,.55) 0%, rgba(6,15,36,.25) 40%, rgba(6,15,36,.88) 100%)" }} />
         <div className="absolute inset-0 opacity-[0.14]" style={{ backgroundImage: "linear-gradient(rgba(250,247,240,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(250,247,240,.5) 1px, transparent 1px)", backgroundSize: "72px 72px" }} />
       </motion.div>

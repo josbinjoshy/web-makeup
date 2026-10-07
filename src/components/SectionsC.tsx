@@ -8,7 +8,7 @@ export function Placements() {
   return (
     <section id="placements" aria-label="Placements and careers" className="bg-cream-50 scroll-mt-20 border-b hairline">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 md:py-28">
-        <SectionHead no="08" kicker="Careers"
+        <SectionHead no="07" kicker="Careers"
           title={<>FROM CAMPUS<br />→ CAREER<span className="text-brass-600">.</span></>}
           lede="Official placement record, set as animated typography — not boring cards. Recruiter names only where verified on fisat.ac.in."
         />
@@ -54,7 +54,7 @@ export function NewsFeed() {
   return (
     <section id="news" aria-label="News and events" className="bg-cream-100/60 scroll-mt-20">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 md:py-28">
-        <SectionHead no="09" kicker="Editorial feed"
+        <SectionHead no="08" kicker="Editorial feed"
           title={<>NEWS / EVENTS /<br />WINS<span className="text-brass-600">.</span></>}
           lede="Drawn from the official FISAT news ticker and announcements (Sep 2026). Filter without losing place."
         />
@@ -93,7 +93,7 @@ export function Vision() {
   return (
     <section id="vision" aria-label="Vision and mission" className="bg-cream-50 scroll-mt-20 border-t hairline">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 md:py-28">
-        <SectionHead no="10" kicker="Why we exist"
+        <SectionHead no="09" kicker="Why we exist"
           title={<>“FOCUS ON<br />EXCELLENCE”<span className="text-brass-600">.</span></>}
           lede="Official motto, vision, mission and core values — quoted verbatim from fisat.ac.in/vision. Not paraphrased."
         />
@@ -139,7 +139,7 @@ export function Admissions() {
     <section id="admissions" aria-label="Admissions" className="bg-brass-500 text-navy-950 scroll-mt-20">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 md:py-24">
         <Reveal>
-          <p className="kicker text-navy-950/60">11 — Admissions</p>
+          <p className="kicker text-navy-950/60">10 — Admissions</p>
           <h2 className="font-display font-extrabold tracking-tight leading-[0.92] text-4xl md:text-7xl mt-3">YOUR NEXT CHAPTER<br />STARTS HERE<span className="text-cream-50">.</span></h2>
         </Reveal>
         <div className="grid lg:grid-cols-[1fr_1.3fr] gap-8 mt-10">
@@ -157,8 +157,8 @@ export function Admissions() {
               {admissions.eligibility.map((e) => <li key={e} className="flex gap-2 border-t border-navy-950/15 pt-2"><BadgeCheck size={16} className="mt-0.5 shrink-0" aria-hidden="true" />{e}</li>)}
             </ul>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="https://fisat.ac.in/admission/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-navy-950 text-cream-50 font-display font-bold px-7 py-4 text-sm min-h-[52px] hover:bg-navy-900">
-                APPLY — OFFICIAL PORTAL <ArrowUpRight size={16} aria-hidden="true" />
+              <a href="#admissions-fee" className="inline-flex items-center gap-2 bg-navy-950 text-cream-50 font-display font-bold px-7 py-4 text-sm min-h-[52px] hover:bg-navy-900">
+                APPLY — ADMISSIONS DESK <ArrowUpRight size={16} aria-hidden="true" />
               </a>
               <a href={`mailto:${institution.email}`} className="inline-flex items-center gap-2 border-2 border-navy-950 font-display font-bold px-7 py-4 text-sm min-h-[52px] hover:bg-navy-950 hover:text-cream-50">
                 CONTACT ADMISSIONS
@@ -166,7 +166,7 @@ export function Admissions() {
             </div>
             <p className="mt-4 text-xs font-medium text-navy-950/70">{admissions.ctaNote}</p>
           </div>
-          <div className="bg-navy-950 text-cream-50 p-6 md:p-8">
+          <div id="admissions-fee" className="bg-navy-950 text-cream-50 p-6 md:p-8 scroll-mt-24">
             <h3 className="font-display font-bold text-lg flex items-center gap-2"><GraduationCap size={20} aria-hidden="true" /> B.Tech fee structure — Admission Year 2026 (total payable)</h3>
             <dl className="mt-4 divide-y divide-cream-50/10">
               {admissions.btechFee2026.map((f) => (
@@ -176,7 +176,7 @@ export function Admissions() {
                 </div>
               ))}
             </dl>
-            <p className="text-[11px] text-cream-50/50 mt-3">Fee may change per Govt/University orders. Source: fisat.ac.in/admission.</p>
+            <p className="text-[11px] text-cream-50/50 mt-3">Fee may change per Govt/University orders. See eligibility & contacts on this page.</p>
             <h4 className="kicker text-brass-400 mt-6">Talk to us</h4>
             <ul className="mt-2 space-y-1.5 text-sm">
               {admissions.contacts.map((c) => <li key={c.label} className="flex gap-2"><span className="font-bold w-24 shrink-0">{c.label}</span><span className="text-cream-50/75">{c.value}</span></li>)}
@@ -189,13 +189,55 @@ export function Admissions() {
 }
 
 export function Footer() {
+  const cols: { h: string; links: { label: string; href: string }[] }[] = [
+    {
+      h: "Admissions",
+      links: [
+        { label: "B.Tech", href: "#admissions" },
+        { label: "M.Tech", href: "#admissions" },
+        { label: "MBA", href: "#admissions" },
+        { label: "MCA / IMCA", href: "#admissions" },
+        { label: "Fees & Scholarships", href: "#admissions-fee" },
+        { label: "Hostel admission", href: "#campus" },
+      ],
+    },
+    {
+      h: "Departments",
+      links: [
+        { label: "CSE & CSD", href: "#academics" },
+        { label: "ECE & EIE", href: "#academics" },
+        { label: "EEE & ME", href: "#academics" },
+        { label: "Civil", href: "#academics" },
+        { label: "MBA (FBS)", href: "#academics" },
+        { label: "MCA", href: "#academics" },
+        { label: "Science & Humanities", href: "#academics" },
+      ],
+    },
+    {
+      h: "Campus",
+      links: [
+        { label: "Library & OPAC", href: "#library" },
+        { label: "Central Computing", href: "#campus" },
+        { label: "Hostel & Cafeteria", href: "#campus" },
+        { label: "Sports & Fitness", href: "#life" },
+        { label: "Transport", href: "#transport" },
+        { label: "Placements", href: "#placements" },
+        { label: "Campus Life", href: "#life" },
+      ],
+    },
+  ];
   return (
     <footer className="bg-navy-950 text-cream-50" aria-label="Footer">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 pt-14 md:pt-20 pb-8">
         <div className="grid md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
           <div>
-            <p className="font-display font-extrabold text-4xl tracking-tight">FISAT<span className="text-brass-500">.</span></p>
-            <p className="mt-3 text-sm text-cream-50/70 leading-relaxed max-w-sm">
+            <img
+              src="/fisat-logo.png"
+              alt="FISAT — Federal Institute of Science and Technology, Focus on Excellence, Autonomous"
+              className="h-16 md:h-20 w-auto max-w-[300px] object-contain bg-white px-2 py-1 rounded-sm"
+              loading="lazy"
+            />
+            <p className="mt-4 text-sm text-cream-50/70 leading-relaxed max-w-sm">
               Federal Institute of Science And Technology (Autonomous)<br />
               {institution.approvals}.<br />
               NAAC A+ & NBA [B.Tech — CSE, ECE, EEE, EIE, ME & CE] • ISO 21001:2018.
@@ -206,25 +248,21 @@ export function Footer() {
               Email: <a href={`mailto:${institution.email}`} className="underline hover:text-brass-400">{institution.email}</a>
             </address>
           </div>
-          {[
-            { h: "Admissions", links: ["B.Tech", "M.Tech", "MBA", "MCA / IMCA", "Fees & Scholarships", "Hostel admission"] },
-            { h: "Departments", links: ["CSE & CSD", "ECE & EIE", "EEE & ME", "Civil", "MBA (FBS)", "MCA", "Science & Humanities"] },
-            { h: "Campus", links: ["Library & OPAC", "Central Computing", "Hostel & Cafeteria", "Sports & Fitness", "Transport", "Placements", "Campus Life"] },
-          ].map((col) => (
+          {cols.map((col) => (
             <nav key={col.h} aria-label={col.h}>
               <h3 className="kicker text-brass-400">{col.h}</h3>
               <ul className="mt-4 space-y-1">
                 {col.links.map((l) => (
-                  <li key={l}><a href="https://fisat.ac.in" target="_blank" rel="noreferrer" className="block py-1.5 text-sm text-cream-50/70 hover:text-cream-50 min-h-[36px]">{l}</a></li>
+                  <li key={l.label}><a href={l.href} className="block py-1.5 text-sm text-cream-50/70 hover:text-cream-50 min-h-[36px]">{l.label}</a></li>
                 ))}
               </ul>
             </nav>
           ))}
         </div>
         <div className="mt-12 pt-6 border-t hairline-light flex flex-col md:flex-row gap-3 justify-between text-xs text-cream-50/55">
-          <p>© 2026 FISAT concept redesign — frontend-only competition entry. Facts verified against fisat.ac.in. Transport times representative.</p>
+          <p>© 2026 FISAT — Hormis Nagar, Mookkannoor, Angamaly. All content on this site; transport times representative.</p>
           <p className="flex gap-4">
-            <a href="https://fisat.ac.in" target="_blank" rel="noreferrer" className="hover:text-cream-50 min-h-[44px] inline-block">FISAT.AC.IN ↗</a>
+            <span className="min-h-[44px] inline-block">HORMIS NAGAR • MOOKKANNOOR</span>
             <a href="#top" className="hover:text-cream-50 min-h-[44px] inline-block">BACK TO TOP ↑</a>
           </p>
         </div>

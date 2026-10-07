@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Academics, BuiltAtFisat, CampusMap } from "./components/SectionsA";
+import { Academics, CampusMap } from "./components/SectionsA";
 import { CampusLife, Founder, Library, Transport } from "./components/SectionsB";
 import { Admissions, Footer, NewsFeed, Placements, Vision } from "./components/SectionsC";
 import { Hero, Nav, StatsStrip } from "./components/Chrome";
@@ -35,7 +35,6 @@ export default function App() {
         <StatsStrip />
         <CampusMap />
         <Academics />
-        <BuiltAtFisat />
         <Founder />
         <CampusLife />
         <Transport />

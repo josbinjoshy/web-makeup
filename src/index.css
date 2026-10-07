@@ -11,9 +11,9 @@
   --color-cream-50: #faf7f0;
   --color-cream-100: #f4efe3;
   --color-cream-200: #e9e1cf;
-  --color-brass-400: #d4af5a;
-  --color-brass-500: #c9a24b;
-  --color-brass-600: #a98433;
+  --color-brass-400: #fb923c;
+  --color-brass-500: #f97316;
+  --color-brass-600: #ea580c;
 }
 
 html { scroll-behavior: smooth; }
@@ -60,7 +60,7 @@ body {
 
 /* focus */
 :focus-visible {
-  outline: 2px solid #c9a24b;
+  outline: 2px solid #f97316;
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -84,7 +84,7 @@ body {
 /* custom cursor dot (desktop only) */
 #cursor-dot {
   position: fixed; top: 0; left: 0; width: 10px; height: 10px; border-radius: 9999px;
-  background: #c9a24b; pointer-events: none; z-index: 90; mix-blend-mode: multiply;
+  background: #f97316; pointer-events: none; z-index: 90; mix-blend-mode: multiply;
   transform: translate(-50%, -50%); transition: width .25s, height .25s, opacity .25s;
 }
 @media (pointer: coarse) { #cursor-dot { display: none; } }

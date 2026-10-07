@@ -9,7 +9,7 @@ export function Founder() {
     <section id="founder" aria-label="Founder story" className="bg-navy-950 text-cream-50 scroll-mt-20 relative overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 md:py-28 grid lg:grid-cols-2 gap-10 lg:gap-16">
         <div>
-          <SectionHead dark no="04" kicker="The idea that started it"
+          <SectionHead dark no="03" kicker="The idea that started it"
             title={<>ADV. P. V.<br />MATHEW<span className="text-brass-500">.</span></>}
             lede="Founder Chairman • 1953–2017 • Fondly called 'Mathew Sir'. Institutional storytelling only — no invented quotations."
           />
@@ -61,7 +61,7 @@ export function CampusLife() {
   return (
     <section id="life" aria-label="FISAT campus life" className="bg-cream-100/60 scroll-mt-20 border-b hairline">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 md:py-28">
-        <SectionHead no="05" kicker="Student life"
+        <SectionHead no="04" kicker="Student life"
           title={<>FISAT CAMPUS<br />LIFE<span className="text-brass-600">.</span></>}
           lede="Hostel to hackathon. A visual collage drawn from official FISAT life categories — every tile is a real place or programme."
         />
@@ -104,7 +104,7 @@ export function Transport() {
     <section id="transport" aria-label="Transportation experience" className="bg-cream-50 scroll-mt-20">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 md:py-28 grid lg:grid-cols-2 gap-10">
         <div>
-          <SectionHead no="06" kicker="Transport"
+          <SectionHead no="05" kicker="Transport"
             title={<>GET ME<br />TO FISAT<span className="text-brass-600">.</span></>}
             lede="Select where you're starting from. Routes follow FISAT's Angamaly–Mookkannoor hub pattern. Timings are representative — always confirm with the official transport desk before travelling."
           />
@@ -139,7 +139,7 @@ export function Transport() {
             <div className="border hairline-light p-4"><p className="kicker text-cream-50/50 text-[10px] flex gap-1 items-center"><Clock size={12} aria-hidden="true" /> First bus</p><p className="font-display font-bold text-xl mt-1">{route.firstBus}</p></div>
             <div className="border hairline-light p-4"><p className="kicker text-cream-50/50 text-[10px] flex gap-1 items-center"><ArrowUpDown size={12} aria-hidden="true" /> Frequency</p><p className="font-bold mt-1 leading-snug">{route.frequency}</p></div>
           </div>
-          <p className="mt-4 text-xs text-cream-50/60 leading-relaxed">{route.note} Representative pattern for a design concept — verify current routes & timings at fisat.ac.in or the college office (8:00 AM–4:30 PM).</p>
+          <p className="mt-4 text-xs text-cream-50/60 leading-relaxed">{route.note} Representative pattern for a design concept — verify current routes & timings with the college transport desk or college office (8:00 AM–4:30 PM).</p>
         </motion.div>
       </div>
     </section>
@@ -157,7 +157,7 @@ export function Library() {
     <section id="library" aria-label="Library" className="bg-navy-900 text-cream-50 scroll-mt-20 border-y border-navy-950">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 md:py-28 grid lg:grid-cols-[1.2fr_1fr] gap-10">
         <div>
-          <SectionHead dark no="07" kicker="Knowledge"
+          <SectionHead dark no="06" kicker="Knowledge"
             title={<>THE QUIET<br />ENGINE<span className="text-brass-500">.</span></>}
             lede="Library & Information Centre (LIC) — 'on its way to becoming an outstanding learning resource centre' (official library page)."
           />
