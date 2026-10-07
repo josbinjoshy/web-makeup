@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, BadgeCheck, Briefcase, GraduationCap } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { admissions, institution, news, placements, visionMission, type NewsItem } from "../data/institution";
 import { Counter, Reveal, SectionHead } from "./ui";
 
@@ -189,40 +190,40 @@ export function Admissions() {
 }
 
 export function Footer() {
-  const cols: { h: string; links: { label: string; href: string }[] }[] = [
+  const cols: { h: string; links: { label: string; to: string }[] }[] = [
     {
       h: "Admissions",
       links: [
-        { label: "B.Tech", href: "#admissions" },
-        { label: "M.Tech", href: "#admissions" },
-        { label: "MBA", href: "#admissions" },
-        { label: "MCA / IMCA", href: "#admissions" },
-        { label: "Fees & Scholarships", href: "#admissions-fee" },
-        { label: "Hostel admission", href: "#campus" },
+        { label: "B.Tech", to: "/admissions" },
+        { label: "M.Tech", to: "/admissions" },
+        { label: "MBA", to: "/admissions" },
+        { label: "MCA / IMCA", to: "/admissions" },
+        { label: "Fees & Scholarships", to: "/admissions" },
+        { label: "Hostel admission", to: "/campus-life" },
       ],
     },
     {
       h: "Departments",
       links: [
-        { label: "CSE & CSD", href: "#academics" },
-        { label: "ECE & EIE", href: "#academics" },
-        { label: "EEE & ME", href: "#academics" },
-        { label: "Civil", href: "#academics" },
-        { label: "MBA (FBS)", href: "#academics" },
-        { label: "MCA", href: "#academics" },
-        { label: "Science & Humanities", href: "#academics" },
+        { label: "CSE & CSD", to: "/academics" },
+        { label: "ECE & EIE", to: "/academics" },
+        { label: "EEE & ME", to: "/academics" },
+        { label: "Civil", to: "/academics" },
+        { label: "MBA (FBS)", to: "/academics" },
+        { label: "MCA", to: "/academics" },
+        { label: "Science & Humanities", to: "/academics" },
       ],
     },
     {
       h: "Campus",
       links: [
-        { label: "Library & OPAC", href: "#library" },
-        { label: "Central Computing", href: "#campus" },
-        { label: "Hostel & Cafeteria", href: "#campus" },
-        { label: "Sports & Fitness", href: "#life" },
-        { label: "Transport", href: "#transport" },
-        { label: "Placements", href: "#placements" },
-        { label: "Campus Life", href: "#life" },
+        { label: "About FISAT", to: "/about" },
+        { label: "Faculty", to: "/faculty" },
+        { label: "Library & OPAC", to: "/library" },
+        { label: "Campus Life", to: "/campus-life" },
+        { label: "Placements", to: "/placements" },
+        { label: "News & Events", to: "/news" },
+        { label: "Contact", to: "/contact" },
       ],
     },
   ];
@@ -253,7 +254,7 @@ export function Footer() {
               <h3 className="kicker text-brass-400">{col.h}</h3>
               <ul className="mt-4 space-y-1">
                 {col.links.map((l) => (
-                  <li key={l.label}><a href={l.href} className="block py-1.5 text-sm text-cream-50/70 hover:text-cream-50 min-h-[36px]">{l.label}</a></li>
+                  <li key={l.label}><Link to={l.to} className="block py-1.5 text-sm text-cream-50/70 hover:text-cream-50 min-h-[36px]">{l.label}</Link></li>
                 ))}
               </ul>
             </nav>
@@ -263,18 +264,18 @@ export function Footer() {
           <p>© 2026 FISAT — Hormis Nagar, Mookkannoor, Angamaly. All content on this site; transport times representative.</p>
           <p className="flex gap-4">
             <span className="min-h-[44px] inline-block">HORMIS NAGAR • MOOKKANNOOR</span>
-            <a href="#top" className="hover:text-cream-50 min-h-[44px] inline-block">BACK TO TOP ↑</a>
+            <Link to="/" className="hover:text-cream-50 min-h-[44px] inline-block">BACK TO HOME ↑</Link>
           </p>
         </div>
       </div>
       {/* mobile bottom nav + sticky CTA */}
       <div className="md:hidden sticky bottom-0 z-40 bg-navy-950/95 backdrop-blur border-t hairline-light">
         <nav aria-label="Mobile" className="grid grid-cols-4 text-center text-[11px] font-display font-bold">
-          {[["Campus", "#campus"], ["Study", "#academics"], ["Visit", "#transport"], ["News", "#news"]].map(([l, h]) => (
-            <a key={l} href={h} className="py-3.5 min-h-[52px] flex items-center justify-center text-cream-50/80">{l.toUpperCase()}</a>
+          {([["Campus", "/campus-life"], ["Study", "/academics"], ["Faculty", "/faculty"], ["News", "/news"]] as const).map(([l, h]) => (
+            <Link key={l} to={h} className="py-3.5 min-h-[52px] flex items-center justify-center text-cream-50/80">{l.toUpperCase()}</Link>
           ))}
         </nav>
-        <a href="#admissions" className="block text-center bg-brass-500 text-navy-950 font-display font-extrabold py-4 min-h-[56px]">APPLY TO FISAT →</a>
+        <Link to="/admissions" className="block text-center bg-brass-500 text-navy-950 font-display font-extrabold py-4 min-h-[56px]">APPLY TO FISAT →</Link>
       </div>
     </footer>
   );

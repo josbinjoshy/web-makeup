@@ -1,16 +1,17 @@
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { institution } from "../data/institution";
 import { Magnetic } from "./ui";
 
 const links = [
-  { href: "#campus", label: "Campus" },
-  { href: "#academics", label: "Academics" },
-  { href: "#founder", label: "Founder" },
-  { href: "#life", label: "Life" },
-  { href: "#placements", label: "Careers" },
-  { href: "#news", label: "News" },
+  { to: "/about", label: "About" },
+  { to: "/academics", label: "Academics" },
+  { to: "/faculty", label: "Faculty" },
+  { to: "/placements", label: "Careers" },
+  { to: "/library", label: "Library" },
+  { to: "/contact", label: "Contact" },
 ];
 
 export function Nav() {
@@ -28,27 +29,34 @@ export function Nav() {
       </a>
       <header className={`fixed inset-x-0 top-0 z-50 transition-all ${scrolled ? "bg-cream-50/92 backdrop-blur border-b hairline" : "bg-transparent"}`} style={{ background: scrolled ? "rgba(250,247,240,.93)" : "transparent" }}>
         <nav aria-label="Primary" className="mx-auto max-w-[1400px] px-5 md:px-10 h-16 md:h-20 flex items-center justify-between">
-          <a href="#top" className="flex items-center gap-3 min-h-[44px]" aria-label="FISAT — Federal Institute of Science and Technology, home">
+          <Link to="/" className="flex items-center gap-3 min-h-[44px]" aria-label="FISAT — Federal Institute of Science and Technology, home">
             <img
               src="/fisat-logo.png"
               alt="FISAT — Federal Institute of Science and Technology, Focus on Excellence, Autonomous"
               className="h-11 md:h-14 w-auto max-w-[280px] md:max-w-[360px] object-contain bg-white px-2 py-1 rounded-sm shadow-sm"
               fetchPriority="high"
             />
-          </a>
+          </Link>
           <ul className="hidden md:flex items-center gap-7">
             {links.map((l) => (
-              <li key={l.href}>
-                <a href={l.href} className={`text-[13px] font-medium tracking-wide hover:opacity-70 min-h-[44px] inline-flex items-center ${scrolled ? "text-navy-900" : "text-cream-50"}`}>
+              <li key={l.to}>
+                <NavLink
+                  to={l.to}
+                  className={({ isActive }) =>
+                    `text-[13px] font-medium tracking-wide hover:opacity-70 min-h-[44px] inline-flex items-center border-b-2 -mb-0.5 ${
+                      scrolled ? "text-navy-900" : "text-cream-50"
+                    } ${isActive ? "border-brass-500" : "border-transparent"}`
+                  }
+                >
                   {l.label.toUpperCase()}
-                </a>
+                </NavLink>
               </li>
             ))}
             <li>
               <Magnetic>
-                <a href="#admissions" className="inline-flex items-center gap-2 bg-brass-500 text-navy-950 font-display font-bold text-[13px] tracking-wide px-5 py-2.5 hover:bg-brass-400 min-h-[44px]">
+                <Link to="/admissions" className="inline-flex items-center gap-2 bg-brass-500 text-navy-950 font-display font-bold text-[13px] tracking-wide px-5 py-2.5 hover:bg-brass-400 min-h-[44px]">
                   ADMISSIONS <ArrowUpRight size={15} aria-hidden="true" />
-                </a>
+                </Link>
               </Magnetic>
             </li>
           </ul>
@@ -60,17 +68,17 @@ export function Nav() {
           {open && (
             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-navy-900 text-cream-50 border-t hairline-light overflow-hidden">
               <ul className="px-6 py-4 space-y-1">
-                {links.map((l) => (
-                  <li key={l.href}>
-                    <a href={l.href} onClick={() => setOpen(false)} className="block py-3 font-display font-bold text-lg border-b hairline-light min-h-[44px]">
+                {[{ to: "/", label: "Home" }, ...links].map((l) => (
+                  <li key={l.to}>
+                    <Link to={l.to} onClick={() => setOpen(false)} className="block py-3 font-display font-bold text-lg border-b hairline-light min-h-[44px]">
                       {l.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
                 <li className="pt-3 pb-2">
-                  <a href="#admissions" onClick={() => setOpen(false)} className="block text-center bg-brass-500 text-navy-950 font-display font-bold px-5 py-3 min-h-[44px]">
+                  <Link to="/admissions" onClick={() => setOpen(false)} className="block text-center bg-brass-500 text-navy-950 font-display font-bold px-5 py-3 min-h-[44px]">
                     ADMISSIONS
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </motion.div>
