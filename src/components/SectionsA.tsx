@@ -1,78 +1,106 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Building2, MapPin } from "lucide-react";
+import { ArrowUpRight, Building2, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { useState } from "react";
 import { campusNodes, departments } from "../data/institution";
 import { Reveal, SectionHead } from "./ui";
 
 export function CampusMap() {
   const [active, setActive] = useState(campusNodes[1]);
+  const idx = campusNodes.findIndex((n) => n.id === active.id);
+  const go = (dir: 1 | -1) =>
+    setActive(campusNodes[(idx + dir + campusNodes.length) % campusNodes.length]);
   return (
     <section id="campus" aria-label="Interactive campus experience" className="bg-cream-50 scroll-mt-20">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 md:py-28">
         <SectionHead
           no="01" kicker="Interactive campus"
           title={<>EXPLORE<br />YOUR FISAT<span className="text-brass-600">.</span></>}
-          lede="Not a map — an architectural walk. Tap a node to step inside that part of Hormis Nagar. All descriptions drawn from official FISAT facility pages."
+          lede="Tap a numbered pin on the real campus photo — or just pick a destination from the list. Everything here is drawn from official FISAT facility pages."
         />
+        {/* destination picker — every stop visible, no hunting for dots */}
+        <Reveal>
+          <ul aria-label="All campus destinations — pick one to view" className="flex gap-2 overflow-x-auto no-scrollbar snap-x pb-5 -mx-5 px-5 md:mx-0 md:px-0 md:flex-wrap">
+            {campusNodes.map((n, i) => {
+              const isActive = active.id === n.id;
+              return (
+                <li key={n.id} className="snap-start shrink-0">
+                  <button
+                    onClick={() => setActive(n)}
+                    aria-pressed={isActive}
+                    className={`flex items-center gap-2.5 border px-3.5 py-2.5 min-h-[48px] font-display text-sm font-bold whitespace-nowrap transition-colors ${
+                      isActive
+                        ? "bg-navy-900 text-cream-50 border-navy-900"
+                        : "bg-white/60 hairline text-navy-900 hover:border-navy-900"
+                    }`}
+                  >
+                    <span
+                      className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold shrink-0 ${
+                        isActive ? "bg-brass-500 text-navy-950" : "bg-navy-900/10 text-navy-900"
+                      }`}
+                    >
+                      {i + 1}
+                    </span>
+                    {n.label}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </Reveal>
         <div className="grid lg:grid-cols-[1.5fr_1fr] gap-6 items-stretch">
           <Reveal className="relative border hairline bg-navy-900 text-cream-50 overflow-hidden min-h-[480px] md:min-h-[600px]">
-            {/* stylised architectural illustration */}
-            <svg viewBox="0 0 100 80" className="absolute inset-0 w-full h-full" role="img" aria-label="Stylised FISAT campus illustration with interactive location nodes">
-              <defs>
-                <pattern id="grid" width="5" height="5" patternUnits="userSpaceOnUse">
-                  <path d="M5 0H0V5" fill="none" stroke="rgba(250,247,240,.08)" strokeWidth="0.2" />
-                </pattern>
-              </defs>
-              <rect width="100" height="80" fill="#0a1931" />
-              <rect width="100" height="80" fill="url(#grid)" />
-              {/* paths */}
-              <path d="M0 55 Q 25 50 40 45 T 100 40" stroke="rgba(201,162,75,.5)" strokeWidth="1.2" fill="none" strokeDasharray="3 2" />
-              <path d="M40 45 Q 50 35 62 30" stroke="rgba(250,247,240,.35)" strokeWidth="0.8" fill="none" />
-              <path d="M40 45 Q 35 55 22 60" stroke="rgba(250,247,240,.35)" strokeWidth="0.8" fill="none" />
-              {/* building footprints */}
-              {[
-                [36, 32, 12, 7], [56, 24, 11, 6], [16, 55, 11, 6], [50, 53, 9, 5],
-                [70, 47, 8, 5], [75, 65, 10, 6], [8, 33, 8, 5], [30, 19, 8, 5],
-                [44, 43, 8, 5], [61, 37, 9, 5], [53, 63, 10, 5],
-              ].map(([x, y, w, h], i) => (
-                <g key={i}>
-                  <rect x={x} y={y} width={w} height={h} fill="none" stroke="rgba(250,247,240,.45)" strokeWidth="0.4" />
-                  <rect x={x} y={y} width={w} height={1.2} fill="rgba(201,162,75,.55)" />
-                </g>
-              ))}
-              {/* green */}
-              <ellipse cx="82" cy="22" rx="12" ry="7" fill="none" stroke="rgba(250,247,240,.25)" strokeWidth="0.4" strokeDasharray="2 2" />
-              <ellipse cx="18" cy="70" rx="10" ry="5" fill="none" stroke="rgba(250,247,240,.25)" strokeWidth="0.4" strokeDasharray="2 2" />
-              <text x="3" y="7" fill="rgba(250,247,240,.55)" fontSize="3" letterSpacing="1.5">HORMIS NAGAR — MOOKKANNOOR</text>
-              <text x="3" y="77" fill="rgba(201,162,75,.8)" fontSize="2.6" letterSpacing="1">N ↑ • NOT TO SCALE — ILLUSTRATION</text>
-            </svg>
-            {/* nodes */}
-            {campusNodes.map((n) => {
+            {/* real aerial photograph as the map base */}
+            <img
+              src="/hero-fisat.png"
+              alt="Aerial photograph of the FISAT campus at Hormis Nagar"
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(6,15,36,.55) 0%, rgba(6,15,36,.12) 38%, rgba(6,15,36,.82) 100%)" }} aria-hidden="true" />
+            <p className="absolute top-3 left-3 md:top-4 md:left-4 font-display text-[10px] tracking-[0.22em] text-cream-50/90 bg-navy-950/70 px-3 py-2">
+              AERIAL VIEW — HORMIS NAGAR • PIN POSITIONS ILLUSTRATIVE
+            </p>
+            {/* numbered pins */}
+            {campusNodes.map((n, i) => {
               const isActive = active.id === n.id;
               return (
                 <button
                   key={n.id}
                   onClick={() => setActive(n)}
                   aria-pressed={isActive}
-                  aria-label={`Show ${n.label}`}
+                  aria-label={`Pin ${i + 1}: show ${n.label}`}
                   className="absolute min-w-[44px] min-h-[44px] flex items-center justify-center group"
                   style={{ left: `${n.x}%`, top: `${n.y}%`, transform: "translate(-50%,-50%)" }}
                 >
                   <span className="relative flex items-center justify-center">
-                    {isActive && <span className="node-ping absolute w-8 h-8 rounded-full border border-brass-400" aria-hidden="true" />}
-                    <span className={`w-8 h-8 rounded-full border flex items-center justify-center font-display text-[10px] font-bold transition-all ${isActive ? "bg-brass-500 text-navy-950 border-brass-500 scale-110" : "bg-navy-900/90 text-cream-50 border-cream-50/50 group-hover:border-brass-400 group-hover:text-brass-400"}`}>
-                      {n.short}
+                    {isActive && <span className="node-ping absolute w-9 h-9 rounded-full border-2 border-brass-400" aria-hidden="true" />}
+                    <span className={`w-9 h-9 rounded-full border-2 flex items-center justify-center font-display text-xs font-extrabold transition-all shadow-lg ${isActive ? "bg-brass-500 text-navy-950 border-cream-50 scale-110" : "bg-navy-950/85 text-cream-50 border-cream-50/70 group-hover:border-brass-400 group-hover:text-brass-400"}`}>
+                      {i + 1}
                     </span>
                   </span>
-                  <span className={`hidden md:block absolute top-9 whitespace-nowrap text-[10px] font-display tracking-[0.18em] px-2 py-1 ${isActive ? "text-brass-400" : "text-cream-50/70"}`}>
-                    {n.label.toUpperCase()}
-                  </span>
+                  {isActive && (
+                    <span className="absolute top-full mt-1 whitespace-nowrap bg-navy-950/90 text-brass-400 font-display text-[10px] font-bold tracking-[0.18em] px-2.5 py-1.5">
+                      {n.label.toUpperCase()}
+                    </span>
+                  )}
                 </button>
               );
             })}
-            <div className="absolute bottom-0 inset-x-0 p-4 md:p-5 flex items-center justify-between border-t hairline-light bg-navy-950/70 backdrop-blur text-xs">
-              <span className="text-cream-50/70 font-display tracking-[0.2em]">11 DESTINATIONS • TAP TO ENTER</span>
-              <span className="text-brass-400 font-display text-xs hidden sm:block">{active.label.toUpperCase()}</span>
+            <div className="absolute bottom-0 inset-x-0 p-3 md:p-4 flex items-center gap-2 md:gap-3 border-t hairline-light bg-navy-950/80 backdrop-blur">
+              <button onClick={() => go(-1)} aria-label="Previous destination" className="w-11 h-11 shrink-0 border border-cream-50/30 flex items-center justify-center hover:border-brass-400 hover:text-brass-400 min-w-[44px] min-h-[44px]">
+                <ChevronLeft size={18} aria-hidden="true" />
+              </button>
+              <div className="flex-1 min-w-0" aria-live="polite">
+                <p className="font-display font-extrabold text-sm md:text-base truncate">
+                  {String(idx + 1).padStart(2, "0")} — {active.label}
+                </p>
+                <p className="text-[11px] text-cream-50/60">
+                  {idx + 1} of {campusNodes.length} • tap pins or use the list
+                </p>
+              </div>
+              <button onClick={() => go(1)} aria-label="Next destination" className="w-11 h-11 shrink-0 border border-cream-50/30 flex items-center justify-center hover:border-brass-400 hover:text-brass-400 min-w-[44px] min-h-[44px]">
+                <ChevronRight size={18} aria-hidden="true" />
+              </button>
             </div>
           </Reveal>
 
@@ -86,7 +114,9 @@ export function CampusMap() {
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="kicker text-brass-600">Now viewing</p>
+                    <p className="kicker text-brass-600">
+                      Now viewing {idx + 1} of {campusNodes.length}
+                    </p>
                     <h3 className="font-display font-extrabold text-3xl md:text-4xl text-navy-900 tracking-tight mt-2">{active.label}</h3>
                   </div>
                   <span className="w-11 h-11 shrink-0 border hairline flex items-center justify-center text-navy-900" aria-hidden="true">
@@ -102,31 +132,18 @@ export function CampusMap() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-auto pt-6 flex gap-2 flex-wrap">
-                  {campusNodes.filter((n) => n.id !== active.id).slice(0, 3).map((n) => (
-                    <button key={n.id} onClick={() => setActive(n)} className="text-xs font-display font-semibold tracking-wide border hairline px-3 py-2 hover:bg-navy-900 hover:text-cream-50 min-h-[40px]">
-                      → {n.label}
-                    </button>
-                  ))}
+                <div className="mt-auto pt-6 flex gap-2">
+                  <button onClick={() => go(-1)} className="flex-1 inline-flex items-center justify-center gap-2 text-xs font-display font-bold tracking-wide border hairline px-3 py-3 hover:bg-navy-900 hover:text-cream-50 min-h-[48px]">
+                    <ChevronLeft size={15} aria-hidden="true" /> PREV
+                  </button>
+                  <button onClick={() => go(1)} className="flex-1 inline-flex items-center justify-center gap-2 text-xs font-display font-bold tracking-wide bg-navy-900 text-cream-50 px-3 py-3 hover:bg-navy-800 min-h-[48px]">
+                    NEXT <ChevronRight size={15} aria-hidden="true" />
+                  </button>
                 </div>
               </motion.div>
             </AnimatePresence>
           </div>
         </div>
-        {/* mobile expandable list for a11y (no hover-only info) */}
-        <details className="lg:hidden mt-4 border hairline bg-white/60 p-4">
-          <summary className="font-display font-bold cursor-pointer min-h-[44px] flex items-center">All 11 destinations (list view)</summary>
-          <ul className="mt-3 space-y-2">
-            {campusNodes.map((n) => (
-              <li key={n.id}>
-                <button onClick={() => { setActive(n); }} className="w-full text-left border-t hairline py-3 flex justify-between items-center min-h-[44px]">
-                  <span className="font-medium">{n.label}</span>
-                  <ArrowUpRight size={16} aria-hidden="true" />
-                </button>
-              </li>
-            ))}
-          </ul>
-        </details>
       </div>
     </section>
   );
