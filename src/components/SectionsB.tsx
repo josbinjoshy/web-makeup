@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpDown, BookOpen, Bus, Clock, Search } from "lucide-react";
+import { BookOpen, Bus, Clock, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { busRoutes, campusLife, founder, libraryData } from "../data/institution";
 import { Reveal, SectionHead } from "./ui";
@@ -97,16 +97,17 @@ export function Transport() {
   const [q, setQ] = useState("");
   const route = useMemo(() => busRoutes.find((r) => r.id === from)!, [from]);
   const suggestions = useMemo(
-    () => busRoutes.filter((r) => r.from.toLowerCase().includes(q.toLowerCase()) || r.via.some((v) => v.toLowerCase().includes(q.toLowerCase()))),
+    () => busRoutes.filter((r) => r.from.toLowerCase().includes(q.toLowerCase()) || r.stops.some((s) => s.stop.toLowerCase().includes(q.toLowerCase()))),
     [q]
   );
+  const campusTime = route.stops[route.stops.length - 1].time;
   return (
     <section id="transport" aria-label="Transportation experience" className="bg-cream-50 scroll-mt-20">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 md:py-28 grid lg:grid-cols-2 gap-10">
         <div>
           <SectionHead no="05" kicker="Transport"
             title={<>GET ME<br />TO FISAT<span className="text-brass-600">.</span></>}
-            lede="Select where you're starting from. Routes follow FISAT's Angamaly–Mookkannoor hub pattern. Timings are representative — always confirm with the official transport desk before travelling."
+            lede="Morning boarding times from the official FISAT college-bus schedule — find your stop and see exactly when the bus reaches it. Timings change by semester, so confirm with the transport desk before travelling."
           />
           <label htmlFor="bus-search" className="kicker text-navy-900/50 flex items-center gap-2"><Search size={14} aria-hidden="true" /> Search a stop</label>
           <input id="bus-search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Try 'Aluva', 'Kalady', 'Thrissur'…"
@@ -116,7 +117,7 @@ export function Transport() {
               <button key={r.id} role="option" aria-selected={from === r.id} onClick={() => setFrom(r.id)}
                 className={`text-left border px-4 py-3.5 min-h-[52px] transition-colors ${from === r.id ? "bg-navy-900 text-cream-50 border-navy-900" : "bg-white/60 hairline hover:border-navy-900"}`}>
                 <span className="font-display font-bold block">{r.from}</span>
-                <span className={`text-xs ${from === r.id ? "text-cream-50/60" : "text-navy-900/55"}`}>{r.firstBus} • {r.frequency}</span>
+                <span className={`text-xs ${from === r.id ? "text-cream-50/60" : "text-navy-900/55"}`}>{r.stops[0].time} → {r.stops[r.stops.length - 1].time} • {r.stops.length - 1} stops</span>
               </button>
             ))}
             {q && suggestions.length === 0 && <p className="text-sm text-navy-900/60 col-span-2">No match — try Aluva, Angamaly, Ernakulam, Chalakudy, Perumbavoor or Thrissur.</p>}
@@ -124,22 +125,25 @@ export function Transport() {
         </div>
         <motion.div key={route.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
           className="border hairline bg-navy-900 text-cream-50 p-6 md:p-10 flex flex-col" aria-live="polite">
-          <p className="kicker text-brass-400 flex items-center gap-2"><Bus size={15} aria-hidden="true" /> Your FISAT bus</p>
+          <p className="kicker text-brass-400 flex items-center gap-2"><Bus size={15} aria-hidden="true" /> {route.routeNo}</p>
           <h3 className="font-display font-extrabold text-3xl md:text-5xl tracking-tight mt-3">{route.from} → Hormis Nagar</h3>
-          <ol className="mt-6 space-y-0">
-            {[...route.via, "FISAT — Hormis Nagar, Mookkannoor"].map((s, i, arr) => (
-              <li key={s} className="relative pl-8 pb-5 last:pb-0 text-sm md:text-base">
+          <ol className="mt-6 space-y-0 max-h-[420px] overflow-auto no-scrollbar pr-1">
+            {route.stops.map((s, i, arr) => (
+              <li key={s.stop} className="relative pl-8 pb-5 last:pb-0 text-sm md:text-base">
                 <span className={`absolute left-[5px] top-1.5 w-2.5 h-2.5 rounded-full ${i === arr.length - 1 ? "bg-brass-500" : "border border-cream-50/60"}`} aria-hidden="true" />
                 {i < arr.length - 1 && <span className="absolute left-[9px] top-5 bottom-0 w-px bg-cream-50/20" aria-hidden="true" />}
-                <span className={i === arr.length - 1 ? "font-bold text-brass-400" : "text-cream-50/85"}>{s}</span>
+                <span className="flex items-baseline justify-between gap-4">
+                  <span className={i === arr.length - 1 ? "font-bold text-brass-400" : "text-cream-50/85"}>{s.stop}</span>
+                  <span className={`font-display font-bold whitespace-nowrap ${i === arr.length - 1 ? "text-brass-400" : "text-cream-50"}`}>{s.time}</span>
+                </span>
               </li>
             ))}
           </ol>
           <div className="grid grid-cols-2 gap-3 mt-7 text-sm">
-            <div className="border hairline-light p-4"><p className="kicker text-cream-50/50 text-[10px] flex gap-1 items-center"><Clock size={12} aria-hidden="true" /> First bus</p><p className="font-display font-bold text-xl mt-1">{route.firstBus}</p></div>
-            <div className="border hairline-light p-4"><p className="kicker text-cream-50/50 text-[10px] flex gap-1 items-center"><ArrowUpDown size={12} aria-hidden="true" /> Frequency</p><p className="font-bold mt-1 leading-snug">{route.frequency}</p></div>
+            <div className="border hairline-light p-4"><p className="kicker text-cream-50/50 text-[10px] flex gap-1 items-center"><Clock size={12} aria-hidden="true" /> Reaches campus</p><p className="font-display font-bold text-xl mt-1">{campusTime}</p></div>
+            <div className="border hairline-light p-4"><p className="kicker text-cream-50/50 text-[10px] flex gap-1 items-center"><Bus size={12} aria-hidden="true" /> Boarding stops</p><p className="font-bold mt-1 leading-snug">{route.stops.length - 1} stops</p></div>
           </div>
-          <p className="mt-4 text-xs text-cream-50/60 leading-relaxed">{route.note} Representative pattern for a design concept — verify current routes & timings with the college transport desk or college office (8:00 AM–4:30 PM).</p>
+          <p className="mt-4 text-xs text-cream-50/60 leading-relaxed">{route.note} Official morning schedule — verify with the transport desk or the college office (8:00 AM–4:30 PM).</p>
         </motion.div>
       </div>
     </section>
